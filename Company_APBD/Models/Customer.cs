@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Company_APBD.Models;
 
 
-[Table("customer")]
 public class Customer
 {
     public int CustomerId { get; set; }

@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company_APBD.Models;
 
-[Table("discount")]
 public class Discount
 {
     public int DiscountId { get; set; }

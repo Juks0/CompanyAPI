@@ -8,6 +8,13 @@ public class Employee
 
     [Required]
     public string Login { get; set; }
+    
+    [Required]
+    public string PasswordHash { get; set; }
 
+    
+    [Required]
     public string Role { get; set; }
+    
+    
 }

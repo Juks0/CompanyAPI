@@ -2,7 +2,6 @@
 
 namespace Company_APBD.Models;
 
-[Table("contract")]
 public class Contract
 {
     public int ContractId { get; set; }
@@ -16,7 +15,5 @@ public class Contract
     public int SupportYears { get; set; }
     public bool IsSigned { get; set; }
 
-    public Customer Customer { get; set; }
-    public Software Software { get; set; }
-    public Discount Discount { get; set; }
+   
 }

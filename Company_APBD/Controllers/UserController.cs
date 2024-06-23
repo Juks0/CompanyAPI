@@ -13,24 +13,24 @@ public class UserController
     }
     
 
-    [HttpPost]
-    public IActionResult AddUser(User user)
-    {
-        _dbService.AddUser(user);
-        return Ok();
-    }
-
-    [HttpPut]
-    public IActionResult UpdateUser(User user)
-    {
-        _dbService.UpdateUser(user);
-        return Ok();
-    }
-
-    [HttpDelete]
-    public IActionResult DeleteUser(int id)
-    {
-        _dbService.DeleteUser(id);
-        return Ok();
-    }
+    // [HttpPost]
+    // public IActionResult AddUser(User user)
+    // {
+    //     _dbService.AddUser(user);
+    //     return Ok();
+    // }
+    //
+    // [HttpPut]
+    // public IActionResult UpdateUser(User user)
+    // {
+    //     _dbService.UpdateUser(user);
+    //     return Ok();
+    // }
+    //
+    // [HttpDelete]
+    // public IActionResult DeleteUser(int id)
+    // {
+    //     _dbService.DeleteUser(id);
+    //     return Ok();
+    // }
 }

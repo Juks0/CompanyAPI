@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company_APBD.Models;
 
-[Table("company_customers")]
 
 public class CompanyCustomer : Customer
 {

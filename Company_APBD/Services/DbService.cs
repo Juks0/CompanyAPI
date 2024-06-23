@@ -2,7 +2,7 @@
 
 namespace Company_APBD.Services;
 
-public class DBService : IDbService
+public class DbService : IDbService
 {
     public Task<CompanyCustomerDTO> AddCompanyCustomer(CompanyCustomerDTO companyCustomerDTO)
     {
