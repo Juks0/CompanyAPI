@@ -5,7 +5,6 @@ public class SoftwareDTO
 {
     public int SoftwareId { get; set; }
 
-    [Required(ErrorMessage = "Name is required")]
     public string Name { get; set; }
 
     public string Description { get; set; }

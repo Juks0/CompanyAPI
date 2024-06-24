@@ -6,10 +6,10 @@ namespace Company_APBD.Models;
 
 public class CompanyCustomer : Customer
 {
-    [Required]
+    
+    [Required(ErrorMessage = "Company name is required")]
     public string CompanyName { get; set; }
-
-    [Required]
-    [StringLength(10)]
+    
+    [Required(ErrorMessage = "KRS number is required")]
     public string KRS { get; set; }
 }

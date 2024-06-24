@@ -11,7 +11,5 @@ public class Subscription
     public DateTime EndDate { get; set; }
     public int DiscountId { get; set; }
 
-    public Customer Customer { get; set; }
-    public Software Software { get; set; }
-    public Discount Discount { get; set; }
+   
 }
