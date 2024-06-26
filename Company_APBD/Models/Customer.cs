@@ -7,10 +7,7 @@ namespace Company_APBD.Models;
 public class Customer
 {
     public int CustomerId { get; set; }
-
-    [Required]
-    public string CustomerType { get; set; }
-
+    
     [Required]
     public string Address { get; set; }
 

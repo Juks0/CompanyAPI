@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WebApplication5.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240623185212_Init")]
+    [Migration("20240626135608_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,9 @@ namespace WebApplication5.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("PriceAfterDiscount")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("SoftwareId")
                         .HasColumnType("int");
 
@@ -73,6 +76,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 1000.00m,
+                            PriceAfterDiscount = 200.00m,
                             SoftwareId = 1,
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 1,
@@ -86,6 +90,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 2000.00m,
+                            PriceAfterDiscount = 1200.00m,
                             SoftwareId = 2,
                             StartDate = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 2,
@@ -99,6 +104,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 3000.00m,
+                            PriceAfterDiscount = 2000.00m,
                             SoftwareId = 3,
                             StartDate = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 3,
@@ -112,6 +118,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 4000.00m,
+                            PriceAfterDiscount = 1900.00m,
                             SoftwareId = 4,
                             StartDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 1,
@@ -125,6 +132,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 1500.00m,
+                            PriceAfterDiscount = 1200.00m,
                             SoftwareId = 5,
                             StartDate = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 2,
@@ -138,6 +146,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 2500.00m,
+                            PriceAfterDiscount = 100.00m,
                             SoftwareId = 6,
                             StartDate = new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 3,
@@ -151,6 +160,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 1200.00m,
+                            PriceAfterDiscount = 200.00m,
                             SoftwareId = 7,
                             StartDate = new DateTime(2024, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 1,
@@ -164,6 +174,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 2600.00m,
+                            PriceAfterDiscount = 2000.00m,
                             SoftwareId = 8,
                             StartDate = new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 2,
@@ -177,6 +188,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 1800.00m,
+                            PriceAfterDiscount = 200.00m,
                             SoftwareId = 9,
                             StartDate = new DateTime(2024, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 3,
@@ -190,6 +202,7 @@ namespace WebApplication5.Migrations
                             EndDate = new DateTime(2024, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsSigned = false,
                             Price = 2200.00m,
+                            PriceAfterDiscount = 1000.00m,
                             SoftwareId = 10,
                             StartDate = new DateTime(2024, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SupportYears = 1,
@@ -206,10 +219,6 @@ namespace WebApplication5.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"), 1L, 1);
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -582,6 +591,9 @@ namespace WebApplication5.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("SoftwareId");
 
                     b.ToTable("Software");
@@ -593,7 +605,8 @@ namespace WebApplication5.Migrations
                             Category = "Finance",
                             CurrentVersion = "1.0",
                             Description = "Financial management software",
-                            Name = "Finance Pro"
+                            Name = "Finance Pro",
+                            Price = 500m
                         },
                         new
                         {
@@ -601,7 +614,8 @@ namespace WebApplication5.Migrations
                             Category = "Education",
                             CurrentVersion = "2.1",
                             Description = "Educational software for schools",
-                            Name = "Edu Learn"
+                            Name = "Edu Learn",
+                            Price = 100m
                         },
                         new
                         {
@@ -609,7 +623,8 @@ namespace WebApplication5.Migrations
                             Category = "Health",
                             CurrentVersion = "3.3",
                             Description = "Health monitoring software",
-                            Name = "Health Tracker"
+                            Name = "Health Tracker",
+                            Price = 300m
                         },
                         new
                         {
@@ -617,7 +632,8 @@ namespace WebApplication5.Migrations
                             Category = "Retail",
                             CurrentVersion = "4.5",
                             Description = "Retail management software",
-                            Name = "Retail Manager"
+                            Name = "Retail Manager",
+                            Price = 800m
                         },
                         new
                         {
@@ -625,7 +641,8 @@ namespace WebApplication5.Migrations
                             Category = "Real Estate",
                             CurrentVersion = "1.2",
                             Description = "Real estate management software",
-                            Name = "Real Estate Pro"
+                            Name = "Real Estate Pro",
+                            Price = 600m
                         },
                         new
                         {
@@ -633,7 +650,8 @@ namespace WebApplication5.Migrations
                             Category = "Marketing",
                             CurrentVersion = "5.0",
                             Description = "Marketing automation software",
-                            Name = "Marketing Hub"
+                            Name = "Marketing Hub",
+                            Price = 150m
                         },
                         new
                         {
@@ -641,7 +659,8 @@ namespace WebApplication5.Migrations
                             Category = "Productivity",
                             CurrentVersion = "2.4",
                             Description = "Project management software",
-                            Name = "Project Planner"
+                            Name = "Project Planner",
+                            Price = 900m
                         },
                         new
                         {
@@ -649,7 +668,8 @@ namespace WebApplication5.Migrations
                             Category = "CRM",
                             CurrentVersion = "3.6",
                             Description = "Customer relationship management software",
-                            Name = "CRM Boost"
+                            Name = "CRM Boost",
+                            Price = 600m
                         },
                         new
                         {
@@ -657,7 +677,8 @@ namespace WebApplication5.Migrations
                             Category = "HR",
                             CurrentVersion = "4.0",
                             Description = "Human resources management software",
-                            Name = "HR Connect"
+                            Name = "HR Connect",
+                            Price = 550m
                         },
                         new
                         {
@@ -665,7 +686,8 @@ namespace WebApplication5.Migrations
                             Category = "Logistics",
                             CurrentVersion = "1.5",
                             Description = "Logistics and supply chain software",
-                            Name = "Logistics Pro"
+                            Name = "Logistics Pro",
+                            Price = 1000m
                         });
                 });
 
@@ -835,7 +857,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 6,
                             Address = "123 Birch St, Warsaw, Poland",
-                            CustomerType = "Company",
                             Email = "info@company1.com",
                             PhoneNumber = "+48678901234",
                             CompanyName = "Company 1",
@@ -845,7 +866,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 7,
                             Address = "234 Pine St, Krakow, Poland",
-                            CustomerType = "Company",
                             Email = "info@company2.com",
                             PhoneNumber = "+48789012345",
                             CompanyName = "Company 2",
@@ -855,7 +875,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 8,
                             Address = "345 Oak St, Poznan, Poland",
-                            CustomerType = "Company",
                             Email = "info@company3.com",
                             PhoneNumber = "+48890123456",
                             CompanyName = "Company 3",
@@ -865,7 +884,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 9,
                             Address = "456 Maple St, Wroclaw, Poland",
-                            CustomerType = "Company",
                             Email = "info@company4.com",
                             PhoneNumber = "+48901234567",
                             CompanyName = "Company 4",
@@ -875,7 +893,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 10,
                             Address = "567 Willow St, Gdansk, Poland",
-                            CustomerType = "Company",
                             Email = "info@company5.com",
                             PhoneNumber = "+48101234568",
                             CompanyName = "Company 5",
@@ -907,7 +924,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 1,
                             Address = "707 Willow St, Gdansk, Poland",
-                            CustomerType = "Company",
                             Email = "info@company5.com",
                             PhoneNumber = "+48101234568",
                             FirstName = "John",
@@ -918,7 +934,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 2,
                             Address = "808 Maple St, Warsaw, Poland",
-                            CustomerType = "Individual",
                             Email = "jane.smith@example.com",
                             PhoneNumber = "+48234567890",
                             FirstName = "Jane",
@@ -929,7 +944,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 3,
                             Address = "909 Oak St, Krakow, Poland",
-                            CustomerType = "Individual",
                             Email = "alice.johnson@example.com",
                             PhoneNumber = "+48345678901",
                             FirstName = "Alice",
@@ -940,7 +954,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 4,
                             Address = "1010 Pine St, Wroclaw, Poland",
-                            CustomerType = "Individual",
                             Email = "bob.brown@example.com",
                             PhoneNumber = "+48456789012",
                             FirstName = "Bob",
@@ -951,7 +964,6 @@ namespace WebApplication5.Migrations
                         {
                             CustomerId = 5,
                             Address = "1111 Cedar St, Poznan, Poland",
-                            CustomerType = "Individual",
                             Email = "carol.davis@example.com",
                             PhoneNumber = "+48567890123",
                             FirstName = "Carol",

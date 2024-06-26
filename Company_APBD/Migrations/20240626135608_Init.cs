@@ -22,6 +22,7 @@ namespace WebApplication5.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DiscountId = table.Column<int>(type: "int", nullable: false),
+                    PriceAfterDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SupportYears = table.Column<int>(type: "int", nullable: false),
                     IsSigned = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -36,7 +37,6 @@ namespace WebApplication5.Migrations
                 {
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -107,6 +107,7 @@ namespace WebApplication5.Migrations
                     SoftwareId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CurrentVersion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -137,43 +138,43 @@ namespace WebApplication5.Migrations
 
             migrationBuilder.InsertData(
                 table: "Contract",
-                columns: new[] { "ContractId", "CustomerId", "DiscountId", "EndDate", "IsSigned", "Price", "SoftwareId", "StartDate", "SupportYears", "Version" },
+                columns: new[] { "ContractId", "CustomerId", "DiscountId", "EndDate", "IsSigned", "Price", "PriceAfterDiscount", "SoftwareId", "StartDate", "SupportYears", "Version" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 1000.00m, 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "1.0" },
-                    { 2, 2, 2, new DateTime(2024, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 2000.00m, 2, new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "2.1" },
-                    { 3, 3, 3, new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 3000.00m, 3, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "3.3" },
-                    { 4, 4, 4, new DateTime(2024, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 4000.00m, 4, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "4.5" },
-                    { 5, 5, 5, new DateTime(2024, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 1500.00m, 5, new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "1.2" },
-                    { 6, 6, 6, new DateTime(2024, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 2500.00m, 6, new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "5.0" },
-                    { 7, 7, 7, new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 1200.00m, 7, new DateTime(2024, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "2.4" },
-                    { 8, 8, 8, new DateTime(2024, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 2600.00m, 8, new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "3.6" },
-                    { 9, 9, 9, new DateTime(2024, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 1800.00m, 9, new DateTime(2024, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "4.0" },
-                    { 10, 10, 10, new DateTime(2024, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 2200.00m, 10, new DateTime(2024, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "1.5" }
+                    { 1, 1, 1, new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 1000.00m, 200.00m, 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "1.0" },
+                    { 2, 2, 2, new DateTime(2024, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 2000.00m, 1200.00m, 2, new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "2.1" },
+                    { 3, 3, 3, new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 3000.00m, 2000.00m, 3, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "3.3" },
+                    { 4, 4, 4, new DateTime(2024, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 4000.00m, 1900.00m, 4, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "4.5" },
+                    { 5, 5, 5, new DateTime(2024, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 1500.00m, 1200.00m, 5, new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "1.2" },
+                    { 6, 6, 6, new DateTime(2024, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 2500.00m, 100.00m, 6, new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "5.0" },
+                    { 7, 7, 7, new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 1200.00m, 200.00m, 7, new DateTime(2024, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "2.4" },
+                    { 8, 8, 8, new DateTime(2024, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 2600.00m, 2000.00m, 8, new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "3.6" },
+                    { 9, 9, 9, new DateTime(2024, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 1800.00m, 200.00m, 9, new DateTime(2024, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "4.0" },
+                    { 10, 10, 10, new DateTime(2024, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 2200.00m, 1000.00m, 10, new DateTime(2024, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "1.5" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "CustomerId", "Address", "CompanyName", "CustomerType", "Discriminator", "Email", "KRS", "PhoneNumber" },
+                columns: new[] { "CustomerId", "Address", "CompanyName", "Discriminator", "Email", "KRS", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { 6, "123 Birch St, Warsaw, Poland", "Company 1", "Company", "CompanyCustomer", "info@company1.com", "1234567890", "+48678901234" },
-                    { 7, "234 Pine St, Krakow, Poland", "Company 2", "Company", "CompanyCustomer", "info@company2.com", "2345678901", "+48789012345" },
-                    { 8, "345 Oak St, Poznan, Poland", "Company 3", "Company", "CompanyCustomer", "info@company3.com", "3456789012", "+48890123456" },
-                    { 9, "456 Maple St, Wroclaw, Poland", "Company 4", "Company", "CompanyCustomer", "info@company4.com", "4567890123", "+48901234567" },
-                    { 10, "567 Willow St, Gdansk, Poland", "Company 5", "Company", "CompanyCustomer", "info@company5.com", "5678901234", "+48101234568" }
+                    { 6, "123 Birch St, Warsaw, Poland", "Company 1", "CompanyCustomer", "info@company1.com", "1234567890", "+48678901234" },
+                    { 7, "234 Pine St, Krakow, Poland", "Company 2", "CompanyCustomer", "info@company2.com", "2345678901", "+48789012345" },
+                    { 8, "345 Oak St, Poznan, Poland", "Company 3", "CompanyCustomer", "info@company3.com", "3456789012", "+48890123456" },
+                    { 9, "456 Maple St, Wroclaw, Poland", "Company 4", "CompanyCustomer", "info@company4.com", "4567890123", "+48901234567" },
+                    { 10, "567 Willow St, Gdansk, Poland", "Company 5", "CompanyCustomer", "info@company5.com", "5678901234", "+48101234568" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "CustomerId", "Address", "CustomerType", "Discriminator", "Email", "FirstName", "LastName", "PESEL", "PhoneNumber" },
+                columns: new[] { "CustomerId", "Address", "Discriminator", "Email", "FirstName", "LastName", "PESEL", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { 1, "707 Willow St, Gdansk, Poland", "Company", "IndividualCustomer", "info@company5.com", "John", "Doe", "12345678901", "+48101234568" },
-                    { 2, "808 Maple St, Warsaw, Poland", "Individual", "IndividualCustomer", "jane.smith@example.com", "Jane", "Smith", "23456789012", "+48234567890" },
-                    { 3, "909 Oak St, Krakow, Poland", "Individual", "IndividualCustomer", "alice.johnson@example.com", "Alice", "Johnson", "34567890123", "+48345678901" },
-                    { 4, "1010 Pine St, Wroclaw, Poland", "Individual", "IndividualCustomer", "bob.brown@example.com", "Bob", "Brown", "45678901234", "+48456789012" },
-                    { 5, "1111 Cedar St, Poznan, Poland", "Individual", "IndividualCustomer", "carol.davis@example.com", "Carol", "Davis", "56789012345", "+48567890123" }
+                    { 1, "707 Willow St, Gdansk, Poland", "IndividualCustomer", "info@company5.com", "John", "Doe", "12345678901", "+48101234568" },
+                    { 2, "808 Maple St, Warsaw, Poland", "IndividualCustomer", "jane.smith@example.com", "Jane", "Smith", "23456789012", "+48234567890" },
+                    { 3, "909 Oak St, Krakow, Poland", "IndividualCustomer", "alice.johnson@example.com", "Alice", "Johnson", "34567890123", "+48345678901" },
+                    { 4, "1010 Pine St, Wroclaw, Poland", "IndividualCustomer", "bob.brown@example.com", "Bob", "Brown", "45678901234", "+48456789012" },
+                    { 5, "1111 Cedar St, Poznan, Poland", "IndividualCustomer", "carol.davis@example.com", "Carol", "Davis", "56789012345", "+48567890123" }
                 });
 
             migrationBuilder.InsertData(
@@ -236,19 +237,19 @@ namespace WebApplication5.Migrations
 
             migrationBuilder.InsertData(
                 table: "Software",
-                columns: new[] { "SoftwareId", "Category", "CurrentVersion", "Description", "Name" },
+                columns: new[] { "SoftwareId", "Category", "CurrentVersion", "Description", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, "Finance", "1.0", "Financial management software", "Finance Pro" },
-                    { 2, "Education", "2.1", "Educational software for schools", "Edu Learn" },
-                    { 3, "Health", "3.3", "Health monitoring software", "Health Tracker" },
-                    { 4, "Retail", "4.5", "Retail management software", "Retail Manager" },
-                    { 5, "Real Estate", "1.2", "Real estate management software", "Real Estate Pro" },
-                    { 6, "Marketing", "5.0", "Marketing automation software", "Marketing Hub" },
-                    { 7, "Productivity", "2.4", "Project management software", "Project Planner" },
-                    { 8, "CRM", "3.6", "Customer relationship management software", "CRM Boost" },
-                    { 9, "HR", "4.0", "Human resources management software", "HR Connect" },
-                    { 10, "Logistics", "1.5", "Logistics and supply chain software", "Logistics Pro" }
+                    { 1, "Finance", "1.0", "Financial management software", "Finance Pro", 500m },
+                    { 2, "Education", "2.1", "Educational software for schools", "Edu Learn", 100m },
+                    { 3, "Health", "3.3", "Health monitoring software", "Health Tracker", 300m },
+                    { 4, "Retail", "4.5", "Retail management software", "Retail Manager", 800m },
+                    { 5, "Real Estate", "1.2", "Real estate management software", "Real Estate Pro", 600m },
+                    { 6, "Marketing", "5.0", "Marketing automation software", "Marketing Hub", 150m },
+                    { 7, "Productivity", "2.4", "Project management software", "Project Planner", 900m },
+                    { 8, "CRM", "3.6", "Customer relationship management software", "CRM Boost", 600m },
+                    { 9, "HR", "4.0", "Human resources management software", "HR Connect", 550m },
+                    { 10, "Logistics", "1.5", "Logistics and supply chain software", "Logistics Pro", 1000m }
                 });
 
             migrationBuilder.InsertData(

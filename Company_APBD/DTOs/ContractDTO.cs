@@ -4,7 +4,6 @@ namespace Company_APBD.DTOs;
 
 public class ContractDTO
 {
-    public int ContractId { get; set; }
     
     public int CustomerId { get; set; }
     
