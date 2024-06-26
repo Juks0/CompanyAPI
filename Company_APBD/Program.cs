@@ -11,7 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
-builder.Services.AddScoped<IDbService, DbService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISoftwareServiceCompany, SoftwareServiceCompany>();
+builder.Services.AddScoped<ISoftwareServiceIndividual, SoftwareServiceIndividual>();
+builder.Services.AddScoped<ICountIncomeService, CountIncomeService>();
 
 var app = builder.Build();
 

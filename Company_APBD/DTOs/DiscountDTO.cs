@@ -7,9 +7,7 @@ public class DiscountDTO
     public int DiscountId { get; set; }
 
     public string Name { get; set; }
-
-    public string DiscountType { get; set; }
-
+    
     public decimal Value { get; set; }
 
     public DateTime StartDate { get; set; }
