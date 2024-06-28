@@ -1,6 +1,7 @@
 ﻿using Company_APBD.DTOs;
 using Company_APBD.Models;
 using Company_APBD.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company_APBD.Controllers;
@@ -33,7 +34,7 @@ public class UserController : ControllerBase
             return StatusCode(500, $"Internal server error: {ex.Message}");
         }
     }
-    
+    [Authorize(Roles = "Admin")]
     [HttpDelete("/IndividualCustomer {id}")]
     public async Task<IActionResult> DeleteIndividualUser(int id)
     {
@@ -62,6 +63,7 @@ public class UserController : ControllerBase
             return NotFound("User not found.");
         }
     }
+    [Authorize(Roles = "Admin")]
     [HttpPost("/updateCompanyCustomer")]
          public async Task<IActionResult>UpdateCompanyUser([FromBody] CompanyCustomerDTO companyCustomer)
          {
@@ -76,6 +78,7 @@ public class UserController : ControllerBase
                  throw;
              }
          }
+    [Authorize(Roles = "Admin")]
     [HttpPost("/updateIndividualCustomer")]
     public async Task<IActionResult> UpdateIndividualUser([FromBody] IndividualCustomerDTO individualCustomer)
     {

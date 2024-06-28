@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Company_APBD.DTOs;
 using Company_APBD.Models;
 using Microsoft.Extensions.Logging;
+using WebApplication5.Exceptions;
 
 namespace Company_APBD.Services
 {
@@ -30,21 +31,34 @@ namespace Company_APBD.Services
         }
         public async Task<CompanyCustomer> GetCompanyCustomer(int id)
         {
+            var customer = await _context.CompanyCustomer.FindAsync(id);
             if (!await DoesCompanyCustomerExist(id))
             {
-                throw new InvalidOperationException($"There is no company customer with id {id}");
+                throw new ReasourceNotFound($"There is no company customer with id {id}");
             }
-            return await _context.CompanyCustomer.FindAsync(id);
+            if (customer.IsDeleted)
+            {
+                throw new ReasourceNotFound($"Customer with id {id} got deleted from database");
+            }
+
+            return customer;
+                
         }
         
         public async Task<IndividualCustomer> GetIndividualCustomer(int id)
         {
+            var customer = await _context.IndividualCustomer.FindAsync(id);
+
             if (!await DoesIndividualCustomerExist(id))
             {
-                throw new InvalidOperationException($"There is no individual customer with id {id}");
+                throw new ReasourceNotFound($"There is no individual customer with id {id}");
+            }
+            if (customer.IsDeleted)
+            {
+                throw new ReasourceNotFound($"Customer with id {id} got deleted from database");
             }
 
-            return await _context.IndividualCustomer.FindAsync(id);
+            return customer;
         }
 
   
@@ -56,10 +70,10 @@ namespace Company_APBD.Services
                 {
                     if (await DoesIndividualCustomerExist(companyCustomer.CustomerId))
                     {
-                        throw new InvalidOperationException(
+                        throw new WrongReasourceException(
                             $"Customer with id {companyCustomer.CustomerId} is an Individual Customer, not a Company Customer.");
                     }
-                    throw new InvalidOperationException(
+                    throw new ReasourceNotFound(
                         $"There is no company customer with id {companyCustomer.CustomerId}");
                 }
 
@@ -90,11 +104,11 @@ namespace Company_APBD.Services
                 {
                     if (await DoesCompanyCustomerExist(individualCustomer.CustomerId))
                     {
-                        throw new InvalidOperationException(
+                        throw new WrongReasourceException(
                             $"Customer with id {individualCustomer.CustomerId} is a Company Customer, not an Individual Customer.");
                     }
 
-                    throw new InvalidOperationException(
+                    throw new ReasourceNotFound(
                         $"There is no individual customer with {individualCustomer.CustomerId}");
                 }
 

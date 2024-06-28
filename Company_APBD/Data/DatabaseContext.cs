@@ -31,21 +31,6 @@ public class DatabaseContext : DbContext
             new Role() { RoleID = 1, Name = "Admin" },
             new Role() { RoleID = 2, Name = "User" }
         );
-        modelBuilder.Entity<Employee>().HasData(
-            new Employee()
-            {
-                EmployeeId = 1,
-                Login = "admin",
-                Password = "admin",
-                RoleID = 1
-            },
-            new Employee()
-            {
-                EmployeeId = 2,
-                Login = "user",
-                Password = "user",
-                RoleID = 2
-            });
         modelBuilder.Entity<Discount>().HasData(
             new Discount() { DiscountID = 1, Value = 0.1m , Name = "Discount1", DiscountType = "Type1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(10)},
             new Discount() { DiscountID = 2, Value = 0.2m , Name = "Discount2", DiscountType = "Type2", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(10)},
@@ -70,6 +55,7 @@ public class DatabaseContext : DbContext
                 { CompanyName = "CompanyName3",KRS="123336722", Email = "Email3", PhoneNumber = "PhoneNumber3",Address = "grrpowska", CustomerID = 6 }
         );
         
+            
     
             base.OnModelCreating(modelBuilder);
         }

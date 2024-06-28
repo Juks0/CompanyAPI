@@ -101,6 +101,8 @@ namespace WebApplication5.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FK_RoleID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -209,9 +211,9 @@ namespace WebApplication5.Migrations
                 columns: new[] { "ID", "DiscountType", "EndDate", "Name", "StartDate", "Value" },
                 values: new object[,]
                 {
-                    { 1, "Type1", new DateTime(2024, 7, 7, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1799), "Discount1", new DateTime(2024, 6, 27, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1770), 0.1m },
-                    { 2, "Type2", new DateTime(2024, 7, 7, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1802), "Discount2", new DateTime(2024, 6, 27, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1801), 0.2m },
-                    { 3, "Type3", new DateTime(2024, 7, 7, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1804), "Discount3", new DateTime(2024, 6, 27, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1803), 0.3m }
+                    { 1, "Type1", new DateTime(2024, 7, 8, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9860), "Discount1", new DateTime(2024, 6, 28, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9830), 0.1m },
+                    { 2, "Type2", new DateTime(2024, 7, 8, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9863), "Discount2", new DateTime(2024, 6, 28, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9863), 0.2m },
+                    { 3, "Type3", new DateTime(2024, 7, 8, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9866), "Discount3", new DateTime(2024, 6, 28, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9865), 0.3m }
                 });
 
             migrationBuilder.InsertData(
@@ -242,16 +244,6 @@ namespace WebApplication5.Migrations
                     { 2, "Category2", "2.0", "Description2", "Software2", 200m },
                     { 3, "Category3", "3.0", "Description3", "Software3", 300m }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Employee",
-                columns: new[] { "ID", "Login", "Password", "FK_RoleID" },
-                values: new object[] { 1, "admin", "admin", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Employee",
-                columns: new[] { "ID", "Login", "Password", "FK_RoleID" },
-                values: new object[] { 2, "user", "user", 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ContractCompanyCustmer_CompanyCustomerID",

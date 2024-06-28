@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Company_APBD.Services
 {
-    public class CountIncomeService : ICountIncomeService
+    public class CountIncomeController : ICountIncomeService
     {
         private readonly DatabaseContext _context;
 
-        public CountIncomeService(DatabaseContext context)
+        public CountIncomeController(DatabaseContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

@@ -14,6 +14,13 @@ namespace Company_APBD.Models
         [Required] 
         [Column("Password")] 
         public string Password { get; set; }
+        
+        public string Salt { get; set; }
+        
+        [Column("RefreshToken")]
+        public string RefreshToken { get; set; }
+        
+        
 
         [Required]
         [ForeignKey("RoleID")]

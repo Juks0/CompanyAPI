@@ -7,6 +7,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using WebApplication5.Exceptions;
 
 namespace Company_APBD.Services
 {
@@ -33,11 +34,20 @@ namespace Company_APBD.Services
 
         public async Task<bool> DoesCustomerExist(int id)
         {
-            bool customerExists = await _context.IndividualCustomer.AnyAsync(c => c.CustomerID == id);
+            var customerExists = await _context.IndividualCustomer.AnyAsync(c => c.CustomerID == id);
+            var customer = await _context.IndividualCustomer.FindAsync(id);
 
             if (!customerExists)
             {
-                throw new InvalidOperationException($"Customer with ID {id} does not exist.");
+                throw new ReasourceNotFound($"Customer with ID {id} does not exist.");
+            }
+
+            if (customer.IsDeleted)
+            {
+                throw new ReasourceNotFound($"Customer with ID {id} has been deleted.");
+            }
+            {
+                
             }
 
             return customerExists;
@@ -63,7 +73,7 @@ namespace Company_APBD.Services
             var software = await _context.Software.FindAsync(id);
             if (software == null)
             {
-                throw new InvalidOperationException($"Software with ID {id} not found.");
+                throw new ReasourceNotFound($"Software with ID {id} not found.");
             }
 
             return software;
@@ -124,7 +134,7 @@ namespace Company_APBD.Services
 
             if (hasContract)
             {
-                throw new InvalidOperationException(
+                throw new AlreadyHasSoftwareException(
                     "The customer have a contract for the specified software.");
             }
         }
@@ -135,12 +145,12 @@ namespace Company_APBD.Services
 
             if (startDate >= endDate)
             {
-                throw new InvalidOperationException("The start date must be before the end date.");
+                throw new WrongTimePeriodException("The start date must be before the end date.");
             }
 
             if (differenceInDays < 3 || differenceInDays > 30)
             {
-                throw new InvalidOperationException(
+                throw new WrongTimePeriodException(
                     "The difference between StartDate and EndDate must be between 3 and 30 days.");
             }
         }
@@ -153,7 +163,7 @@ namespace Company_APBD.Services
         
                 if (contract.isPaid == contract.TotalToPay)
                 {
-                    throw new InvalidOperationException("Contract is already paid.");
+                    throw new ContractIsPaidException("Contract is already paid.");
                 }
         
                 decimal remainingAmountToPay = contract.TotalToPay - contract.isPaid;
@@ -169,7 +179,7 @@ namespace Company_APBD.Services
                 }
                 else
                 {
-                    throw new InvalidOperationException("The payment amount exceeds the total amount to pay.");
+                    throw new TooMuchMoneyException("The payment amount exceeds the total amount to pay.");
                 }
 
                 await _context.SaveChangesAsync();
@@ -199,12 +209,12 @@ namespace Company_APBD.Services
 
             if (contract == null)
             {
-                throw new InvalidOperationException($"Contract with ID {contractId} not found.");
+                throw new ReasourceNotFound($"Contract with ID {contractId} not found.");
             }
 
             if (contract.endDate < DateTime.Now)
             {
-                throw new ApplicationException("Contract has expired.");
+                throw new ReasourceNotFound("Contract has expired.");
             }
 
             return contract;
@@ -215,7 +225,7 @@ namespace Company_APBD.Services
 
             if (customer == null)
             {
-                throw new InvalidOperationException($"Customer with ID {id} not found.");
+                throw new ReasourceNotFound($"Customer with ID {id} not found.");
             }
 
             return customer;

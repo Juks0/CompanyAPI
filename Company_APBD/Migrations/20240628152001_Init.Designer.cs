@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WebApplication5.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240627130904_Init")]
+    [Migration("20240628152001_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -261,27 +261,27 @@ namespace WebApplication5.Migrations
                         {
                             DiscountID = 1,
                             DiscountType = "Type1",
-                            EndDate = new DateTime(2024, 7, 7, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1799),
+                            EndDate = new DateTime(2024, 7, 8, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9860),
                             Name = "Discount1",
-                            StartDate = new DateTime(2024, 6, 27, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1770),
+                            StartDate = new DateTime(2024, 6, 28, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9830),
                             Value = 0.1m
                         },
                         new
                         {
                             DiscountID = 2,
                             DiscountType = "Type2",
-                            EndDate = new DateTime(2024, 7, 7, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1802),
+                            EndDate = new DateTime(2024, 7, 8, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9863),
                             Name = "Discount2",
-                            StartDate = new DateTime(2024, 6, 27, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1801),
+                            StartDate = new DateTime(2024, 6, 28, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9863),
                             Value = 0.2m
                         },
                         new
                         {
                             DiscountID = 3,
                             DiscountType = "Type3",
-                            EndDate = new DateTime(2024, 7, 7, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1804),
+                            EndDate = new DateTime(2024, 7, 8, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9866),
                             Name = "Discount3",
-                            StartDate = new DateTime(2024, 6, 27, 15, 9, 4, 794, DateTimeKind.Local).AddTicks(1803),
+                            StartDate = new DateTime(2024, 6, 28, 17, 20, 1, 177, DateTimeKind.Local).AddTicks(9865),
                             Value = 0.3m
                         });
                 });
@@ -305,31 +305,24 @@ namespace WebApplication5.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Password");
 
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("RefreshToken");
+
                     b.Property<int>("RoleID")
                         .HasColumnType("int")
                         .HasColumnName("FK_RoleID");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmployeeId");
 
                     b.HasIndex("RoleID");
 
                     b.ToTable("Employee");
-
-                    b.HasData(
-                        new
-                        {
-                            EmployeeId = 1,
-                            Login = "admin",
-                            Password = "admin",
-                            RoleID = 1
-                        },
-                        new
-                        {
-                            EmployeeId = 2,
-                            Login = "user",
-                            Password = "user",
-                            RoleID = 2
-                        });
                 });
 
             modelBuilder.Entity("Company_APBD.Models.IndividualCustomer", b =>

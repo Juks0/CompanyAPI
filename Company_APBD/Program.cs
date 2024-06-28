@@ -1,3 +1,4 @@
+using CodeFirst.Middlewares;
 using Company_APBD.Data;
 using Company_APBD.Services;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,9 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ISoftwareServiceCompany, SoftwareServiceCompany>();
 builder.Services.AddScoped<ISoftwareServiceIndividual, SoftwareServiceIndividual>();
-builder.Services.AddScoped<ICountIncomeService, CountIncomeService>();
+builder.Services.AddScoped<ICountIncomeService, CountIncomeController>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+
 
 var app = builder.Build();
 
@@ -24,9 +27,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.Run();
