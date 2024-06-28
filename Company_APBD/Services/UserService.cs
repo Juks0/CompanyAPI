@@ -169,33 +169,6 @@ namespace Company_APBD.Services
             }
         }
         
-        // public async Task<CompanyCustomerDTO> UpdateCustomer(CompanyCustomerDTO companyCustomerDTO)
-        // {
-        //     try
-        //     {
-        //         var companyCustomer = await _context.FindAsync(companyCustomerDTO.CustomerId);
-        //
-        //         if (companyCustomer == null)
-        //         {
-        //             _logger.LogWarning($"Company customer with ID {companyCustomerDTO.CustomerId} not found.");
-        //             return null;
-        //         }
-        //
-        //         companyCustomer.CompanyName = companyCustomerDTO.CompanyName;
-        //         // Update other properties as needed
-        //
-        //         _context.CompanyCustomers.Update(companyCustomer);
-        //         await _context.SaveChangesAsync();
-        //
-        //         return companyCustomerDTO;
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         _logger.LogError($"Error while updating company customer with ID {companyCustomerDTO.CustomerId}: {ex.Message}");
-        //         throw;
-        //     }
-        // }
-        //
         public async Task<bool> DeleteCompanyCustomer(int id)
         {
             try
@@ -207,8 +180,8 @@ namespace Company_APBD.Services
                     _logger.LogWarning($"Company customer with ID {id} not found.");
                     return false;
                 }
-        
-                _context.Remove(companyCustomer);
+               companyCustomer.IsDeleted= true;
+               
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -222,15 +195,14 @@ namespace Company_APBD.Services
         {
             try
             {
-                var companyCustomer = await _context.FindAsync<IndividualCustomer>(id);
+                var individualCustomer = await _context.FindAsync<IndividualCustomer>(id);
         
-                if (companyCustomer == null)
+                if (individualCustomer == null)
                 {
                     _logger.LogWarning($"Company customer with ID {id} not found.");
                     return false;
                 }
-        
-                _context.Remove(companyCustomer);
+                individualCustomer.IsDeleted= true;
                 await _context.SaveChangesAsync();
                 return true;
             }
