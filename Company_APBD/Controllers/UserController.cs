@@ -38,7 +38,10 @@ public class UserController : ControllerBase
     [HttpDelete("/IndividualCustomer {id}")]
     public async Task<IActionResult> DeleteIndividualUser(int id)
     {
-        
+        if (!User.IsInRole("Admin"))
+        {
+            return Unauthorized(); 
+        }
         var result = await _userService.DeleteIndividualCustomer(id);
         if (result)
         {
@@ -49,10 +52,14 @@ public class UserController : ControllerBase
             return NotFound("User not found.");
         }
     }
+    [Authorize(Roles = "Admin")]
     [HttpDelete("/CompanyUser {id}")]
     public async Task<IActionResult> DeleteCompanyUser(int id)
     {
-        
+        if (!User.IsInRole("Admin"))
+        {
+            return Unauthorized(); 
+        }
         var result = await _userService.DeleteCompanyCustomer(id);
         if (result)
         {
@@ -67,6 +74,10 @@ public class UserController : ControllerBase
     [HttpPost("/updateCompanyCustomer")]
          public async Task<IActionResult>UpdateCompanyUser([FromBody] CompanyCustomerDTO companyCustomer)
          {
+             if (!User.IsInRole("Admin"))
+             {
+                 return Unauthorized(); 
+             }
              try
              {
                  var result = await _userService.UpdateCompanyCustomer(companyCustomer);
